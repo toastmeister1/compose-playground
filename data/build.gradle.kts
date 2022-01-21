@@ -7,6 +7,14 @@ plugins {
 
 android {
     compileSdk = Configs.COMPILE_SDK
+
+    defaultConfig {
+        buildConfigField("String", "TMDB_API_KEY", getApiKey("TMDB_API_KEY"))
+    }
+}
+
+fun getApiKey(propertyName: String): String {
+    return com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir).getProperty(propertyName) ?: ""
 }
 
 dependencies {
