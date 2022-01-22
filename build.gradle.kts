@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.4")
         classpath(Dependency.Kotlin.GRADLE_PLUGIN)
+        classpath(Dependency.Kotlin.SERIALIZATION_PLUGIN)
         classpath(Dependency.Dagger.HILT_GRADLE_PLUGIN)
     }
 }

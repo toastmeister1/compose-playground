@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -23,6 +24,7 @@ dependencies {
     kapt(Dependency.Dagger.HILT_COMPILER)
 
     implementation(Dependency.Kotlin.COROUTINE_CORE)
+    implementation(Dependency.Kotlin.SERIALIZATION)
 
     api(Dependency.Room.ROOM)
     implementation(Dependency.Room.KTX)
@@ -31,6 +33,5 @@ dependencies {
     api(Dependency.Square.RETROFIT)
     implementation(Dependency.Square.RETROFIT_MOSHI)
     implementation(Dependency.Square.OKHTTP_LOGGING)
-    implementation(Dependency.Square.MOSHI)
-    implementation(Dependency.Square.MOSHI_CODEGEN)
+    implementation(Dependency.Square.SERIALIZATION_CONVERTER)
 }

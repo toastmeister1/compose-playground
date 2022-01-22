@@ -9,6 +9,8 @@ object Dependency {
         private const val coroutineVersion = "1.5.1"
 
         const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
+        const val SERIALIZATION_PLUGIN = "org.jetbrains.kotlin:kotlin-serialization:$version"
 
         const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
         const val COROUTINE_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
@@ -53,8 +55,7 @@ object Dependency {
         const val RETROFIT_MOSHI = "com.squareup.retrofit2:converter-moshi:2.9.0"
         const val OKHTTP_LOGGING = "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
-        const val MOSHI = "com.squareup.moshi:moshi:1.13.0"
-        const val MOSHI_CODEGEN = "com.squareup.moshi:moshi-kotlin-codegen:1.13.0"
+        const val SERIALIZATION_CONVERTER = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 
     object Test {

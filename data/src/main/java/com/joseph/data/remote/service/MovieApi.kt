@@ -21,6 +21,4 @@ interface MovieApi {
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = LANGUAGE_KR
     ): MovieListModel
-
-
 }
