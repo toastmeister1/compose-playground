@@ -1,7 +1,7 @@
 package com.joseph.composeplayground.di
 
 import com.joseph.domain.interact.MovieRepository
-import com.joseph.domain.usecases.FetchPopularMovieListUseCase
+import com.joseph.domain.usecases.FetchUpComingMovieListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,8 +12,8 @@ import dagger.hilt.components.SingletonComponent
 object DomainModule {
 
     @Provides
-    fun provideFetchPopularMovieListUseCase(movieRepository: MovieRepository): FetchPopularMovieListUseCase {
-        return FetchPopularMovieListUseCase(movieRepository)
+    fun provideFetchPopularMovieListUseCase(movieRepository: MovieRepository): FetchUpComingMovieListUseCase {
+        return FetchUpComingMovieListUseCase(movieRepository)
     }
 
 }
