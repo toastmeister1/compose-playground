@@ -16,7 +16,7 @@ interface MovieApi {
     }
 
     @POST("/movie/upcoming")
-    fun fetchUpComingMovieList(
+    suspend fun fetchUpComingMovieList(
         @Query("page") page: Int,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = LANGUAGE_KR
