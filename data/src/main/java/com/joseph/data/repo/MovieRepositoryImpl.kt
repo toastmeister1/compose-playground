@@ -6,27 +6,23 @@ import com.joseph.domain.model.MovieListEntity
 import com.joseph.domain.util.TaskResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
 internal class MovieRepositoryImpl @Inject constructor(
     private val movieService: MovieApi
 ) : MovieRepository {
-    override suspend fun fetchUpComingMovieList(page: Int, language: String): Flow<TaskResult<MovieListEntity>> {
-        runCatching {
-            movieService.fetchUpComingMovieList(page = page, language = language)
-        }.fold(
-            onSuccess = { model ->
-                return flow {
-                    TaskResult.Success(model.toEntity())
-                }
-            },
-            onFailure = {
-                return flow {
-                    TaskResult.Failed("[TaskFailed] : ${it.message}")
-                }
-            }
-        )
+
+    override suspend fun fetchUpComingMovieList(
+        page: Int,
+        language: String
+    ): Flow<MovieListEntity> {
+        val model = movieService.fetchUpComingMovieList(page = page, language = language)
+        return flow {
+            emit(TaskResult.Success(model))
+        }.map {
+            it.data.toEntity()
+        }
     }
 }

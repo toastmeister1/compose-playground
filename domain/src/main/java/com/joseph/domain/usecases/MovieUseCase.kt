@@ -18,6 +18,7 @@ class FetchPopularMovieListUseCase @Inject constructor(
 
     override suspend fun invoke(params: Params): Flow<TaskResult<MovieListEntity>> {
         return movieRepository.fetchUpComingMovieList(params.page, params.language)
+            .toResult()
     }
 
 }
