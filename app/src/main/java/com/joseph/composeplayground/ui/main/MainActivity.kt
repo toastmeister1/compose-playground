@@ -1,4 +1,4 @@
-package com.joseph.composeplayground
+package com.joseph.composeplayground.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
