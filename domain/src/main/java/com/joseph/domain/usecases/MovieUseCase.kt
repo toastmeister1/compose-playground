@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
-class FetchPopularMovieListUseCase @Inject constructor(
+class FetchUpComingMovieListUseCase @Inject constructor(
     private val movieRepository: MovieRepository
-): BaseUseCase<Flow<TaskResult<MovieListEntity>>, FetchPopularMovieListUseCase.Params>() {
+): BaseUseCase<Flow<TaskResult<MovieListEntity>>, FetchUpComingMovieListUseCase.Params>() {
 
     class Params(
         val page: Int,

@@ -13,7 +13,7 @@ data class MovieModel(
     @SerialName("genre_ids")
     val genreIds: List<Int>?,
     val id: Int?,
-    @SerialName("original_langua")
+    @SerialName("original_language")
     val originalLanguage: String?,
     @SerialName("original_title")
     val originalTitle: String?,
