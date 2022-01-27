@@ -1,4 +1,4 @@
 package com.joseph.composeplayground.base.component
 
 
-interface State
+internal interface UiAction

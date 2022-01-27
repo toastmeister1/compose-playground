@@ -1,12 +1,10 @@
 package com.joseph.composeplayground.ui.main
 
-import com.joseph.composeplayground.base.component.RenderAction
-import com.joseph.composeplayground.base.component.State
-import com.joseph.composeplayground.base.component.UserAction
+import com.joseph.composeplayground.base.component.UiAction
+import com.joseph.composeplayground.base.component.UiEvent
+import com.joseph.composeplayground.model.Movie
 
 
-sealed class MainUserAction : UserAction
-
-sealed class MainRenderAction : RenderAction {
-    class ShowToast(message: String) : MainRenderAction()
+sealed class MainAction : UiAction {
+    object OnUpComingRvTouchedBottom : MainAction()
 }
