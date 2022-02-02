@@ -1,4 +1,4 @@
-package com.joseph.composeplayground.ui.homescreen.dto
+package com.joseph.composeplayground.ui.home.dto
 
 import com.joseph.composeplayground.base.mvi.dto.UiEvent
 

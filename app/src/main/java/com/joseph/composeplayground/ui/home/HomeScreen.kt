@@ -1,16 +1,14 @@
-package com.joseph.composeplayground.ui.homescreen
+package com.joseph.composeplayground.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.joseph.composeplayground.ui.homescreen.dto.HomeState
+import androidx.navigation.NavController
 
 
 @Composable
 fun HomeScreen(
+    navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()

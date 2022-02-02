@@ -1,15 +1,13 @@
-package com.joseph.composeplayground.ui.homescreen
+package com.joseph.composeplayground.ui.home
 
 import com.joseph.composeplayground.base.BaseViewModel
 import com.joseph.composeplayground.model.Movie
-import com.joseph.composeplayground.ui.homescreen.dto.HomeAction
-import com.joseph.composeplayground.ui.homescreen.dto.HomeEvent
-import com.joseph.composeplayground.ui.homescreen.dto.HomeState
+import com.joseph.composeplayground.ui.home.dto.HomeAction
+import com.joseph.composeplayground.ui.home.dto.HomeEvent
+import com.joseph.composeplayground.ui.home.dto.HomeState
 import com.joseph.composeplayground.util.LoadState
 import com.joseph.domain.usecases.FetchUpComingMovieListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
