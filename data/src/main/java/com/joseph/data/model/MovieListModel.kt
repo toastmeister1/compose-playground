@@ -10,13 +10,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MovieListModel(
     val page: Int?,
-    @SerialName("movie_models")
-    val movieModels: List<MovieModel>?
+    @SerialName("results")
+    val results: List<MovieModel>?
 ) {
     fun toEntity(): MovieListEntity {
         return MovieListEntity(
             page = this.page!!,
-            movieModels = this.movieModels!!.map { it.toEntity() }
+            results = this.results!!.map { it.toEntity() }
         )
     }
 }

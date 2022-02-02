@@ -1,5 +1,6 @@
 package com.joseph.composeplayground.ui.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.joseph.composeplayground.base.BaseViewModel
 import com.joseph.composeplayground.model.Movie
@@ -39,7 +40,7 @@ class HomeViewModel @Inject constructor(
                     val newState = uiState.value.copy(
                         loadState = LoadState.Idle,
                         upComingMovieList = uiState.value.upComingMovieList.copy(
-                            movies = uiState.value.upComingMovieList.movies + movieListEntity.movieModels.map { Movie.fromEntity(it) },
+                            movies = uiState.value.upComingMovieList.movies + movieListEntity.results.map { Movie.fromEntity(it) },
                             page = movieListEntity.page!!,
                         )
                     )
