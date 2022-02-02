@@ -1,4 +1,4 @@
-package com.joseph.composeplayground.base.component
+package com.joseph.composeplayground.base.mvi
 
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
