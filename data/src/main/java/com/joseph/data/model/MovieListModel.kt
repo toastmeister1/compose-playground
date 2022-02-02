@@ -15,8 +15,8 @@ data class MovieListModel(
 ) {
     fun toEntity(): MovieListEntity {
         return MovieListEntity(
-            page = this.page,
-            movieModels = this.movieModels?.map { it.toEntity() }
+            page = this.page!!,
+            movieModels = this.movieModels!!.map { it.toEntity() }
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.joseph.composeplayground.ui.home
 
+import androidx.lifecycle.viewModelScope
 import com.joseph.composeplayground.base.BaseViewModel
 import com.joseph.composeplayground.model.Movie
 import com.joseph.composeplayground.ui.home.dto.HomeAction
@@ -8,12 +9,19 @@ import com.joseph.composeplayground.ui.home.dto.HomeState
 import com.joseph.composeplayground.util.LoadState
 import com.joseph.domain.usecases.FetchUpComingMovieListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val fetchUpComingMovieListUseCase: FetchUpComingMovieListUseCase
 ) : BaseViewModel<HomeState, HomeAction, HomeEvent>(HomeState.getInitial()) {
+
+    init {
+        viewModelScope.launch {
+            fetchUpComingMovieList(uiState.value)
+        }
+    }
 
     override suspend fun handleAction(action: HomeAction) {
         when (action) {
@@ -24,7 +32,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private suspend fun fetchUpComingMovieList(state: HomeState) {
-        val params = FetchUpComingMovieListUseCase.Params(page = state.upComingMovieList.page, "ko-KR")
+        val params = FetchUpComingMovieListUseCase.Params(page = state.upComingMovieList.page)
         fetchUpComingMovieListUseCase.invoke(params = params)
             .collectWithCallback(
                 onSuccess = { movieListEntity ->

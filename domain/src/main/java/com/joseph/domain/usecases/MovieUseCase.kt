@@ -12,12 +12,11 @@ class FetchUpComingMovieListUseCase @Inject constructor(
 ): BaseUseCase<Flow<TaskResult<MovieListEntity>>, FetchUpComingMovieListUseCase.Params>() {
 
     class Params(
-        val page: Int,
-        val language: String
+        val page: Int
     )
 
     override suspend fun invoke(params: Params): Flow<TaskResult<MovieListEntity>> {
-        return movieRepository.fetchUpComingMovieList(params.page, params.language)
+        return movieRepository.fetchUpComingMovieList(params.page)
             .toResult()
     }
 

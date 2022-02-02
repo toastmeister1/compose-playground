@@ -1,4 +1,4 @@
-package com.joseph.composeplayground.ui.home.detail
+package com.joseph.composeplayground.ui.detail
 
 import androidx.compose.runtime.Composable
 

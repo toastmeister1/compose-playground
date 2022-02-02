@@ -8,6 +8,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,9 +27,14 @@ object NetworkModule {
     @Provides
     fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
-            .baseUrl("BASE_URL")
+            .baseUrl(MovieApi.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(
+                Json {
+                    ignoreUnknownKeys = true
+                    explicitNulls = false
+                }.asConverterFactory("application/json".toMediaType())
+            )
             .build()
     }
 

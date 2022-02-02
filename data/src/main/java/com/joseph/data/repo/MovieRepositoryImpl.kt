@@ -14,11 +14,8 @@ internal class MovieRepositoryImpl @Inject constructor(
     private val movieService: MovieApi
 ) : MovieRepository {
 
-    override suspend fun fetchUpComingMovieList(
-        page: Int,
-        language: String
-    ): Flow<MovieListEntity> {
-        val model = movieService.fetchUpComingMovieList(page = page, language = language)
+    override suspend fun fetchUpComingMovieList(page: Int): Flow<MovieListEntity> {
+        val model = movieService.fetchUpComingMovieList(page = page)
         return flow {
             emit(TaskResult.Success(model))
         }.map {
