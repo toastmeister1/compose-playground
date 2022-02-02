@@ -38,10 +38,10 @@ class HomeViewModel @Inject constructor(
             .collectWithCallback(
                 onSuccess = { movieListEntity ->
                     val newState = uiState.value.copy(
-                        loadState = LoadState.Idle,
+                        loadState         = LoadState.Idle,
                         upComingMovieList = uiState.value.upComingMovieList.copy(
                             movies = uiState.value.upComingMovieList.movies + movieListEntity.results.map { Movie.fromEntity(it) },
-                            page = movieListEntity.page!!,
+                            page   = movieListEntity.page!!,
                         )
                     )
 

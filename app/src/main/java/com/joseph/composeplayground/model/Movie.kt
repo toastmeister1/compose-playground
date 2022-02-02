@@ -22,19 +22,19 @@ data class Movie(
     companion object {
         fun fromEntity(entity: MovieEntity): Movie {
             return Movie (
-                adult = entity.adult,
-                backdropPath = entity.backdropPath,
-                genreIds = entity.genreIds,
-                id = entity.id,
-                originalLanguage =entity.originalLanguage,
-                originalTitle = entity.originalTitle,
-                overview = entity.overview,
-                popularity = entity.popularity,
-                posterPath = entity.posterPath,
-                releaseDate = entity.releaseDate,
-                title = entity.title,
-                voteAverage = entity.voteAverage,
-                voteCount = entity.voteCount
+                adult            = entity.adult,
+                backdropPath     = entity.backdropPath,
+                genreIds         = entity.genreIds,
+                id               = entity.id,
+                originalLanguage = entity.originalLanguage,
+                originalTitle    = entity.originalTitle,
+                overview         = entity.overview,
+                popularity       = entity.popularity,
+                posterPath       = entity.posterPath,
+                releaseDate      = entity.releaseDate,
+                title            = entity.title,
+                voteAverage      = entity.voteAverage,
+                voteCount        = entity.voteCount
             )
         }
     }
