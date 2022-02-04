@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.joseph.composeplayground.ui.detail.DetailScreen
 import com.joseph.composeplayground.ui.home.HomeScreen
 import com.joseph.composeplayground.ui.theme.ComposePlaygroundTheme
@@ -28,7 +28,9 @@ class MainActivity : ComponentActivity() {
                     composable(
                         route = "home_screen"
                     ) {
-                        HomeScreen(navController = navController)
+                        HomeScreen { movieId ->
+                            navController.navigate(movieId)
+                        }
                     }
 
                     composable(
