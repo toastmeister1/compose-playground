@@ -17,13 +17,15 @@ object Dependency {
     }
 
     object Compose {
-        private const val compose_version = "1.0.1"
+        private const val compose_version = "1.0.5"
         const val UI = "androidx.compose.ui:ui:$compose_version"
         const val MATERIAL = "androidx.compose.material:material:$compose_version"
         const val TOOL_PREVIEW = "androidx.compose.ui:ui-tooling:$compose_version"
         const val JUNIT = "androidx.compose.ui:ui-test-junit4:$compose_version"
         const val TOOL_UI = "androidx.compose.ui:ui-tooling:$compose_version"
         const val ACTIVITY = "androidx.activity:activity-compose:1.4.0"
+
+        const val COIL = "io.coil-kt:coil-compose:1.4.0"
     }
 
     object Dagger {

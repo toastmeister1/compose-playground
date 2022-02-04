@@ -66,6 +66,7 @@ dependencies {
     implementation(Dependency.Compose.MATERIAL)
     implementation(Dependency.Compose.TOOL_PREVIEW)
     implementation(Dependency.Compose.ACTIVITY)
+    implementation(Dependency.Compose.COIL)
     androidTestImplementation(Dependency.Compose.JUNIT)
     debugImplementation(Dependency.Compose.TOOL_UI)
 
