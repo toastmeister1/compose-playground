@@ -7,6 +7,10 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
 import java.util.concurrent.atomic.AtomicBoolean
 
+/*
+* [PRND(헤이딜러) EventFlow]
+* https://github.com/PRNDcompany/MvvmEventSample
+*/
 
 interface EventFlow<out T> : Flow<T> {
 

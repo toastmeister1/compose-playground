@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
-import com.joseph.composeplayground.ui.home.HomeScreen
 import com.joseph.composeplayground.ui.detail.DetailScreen
+import com.joseph.composeplayground.ui.home.HomeScreen
 import com.joseph.composeplayground.ui.theme.ComposePlaygroundTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,11 +33,16 @@ class MainActivity : ComponentActivity() {
 
                     composable(
                         route = "detail_screen/{movieId}",
-                        arguments = listOf(
-                            navArgument("movieId"){ type = NavType.IntType }
-                        )
+                        arguments = listOf(navArgument("movieId") { type = NavType.IntType })
                     ) {
                         DetailScreen()
+                    }
+
+                    composable(
+                        route = "search_screen/{movieName}",
+                        arguments = listOf(navArgument("movieName") { type = NavType.StringType } )
+                    ) {
+                        // SearchScreen
                     }
                 }
             }

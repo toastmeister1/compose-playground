@@ -15,10 +15,10 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Color.White,
-    onPrimary = MainBlue,
-    background = Color.White,
-    onBackground = MainBlue
+    primary = MainBlue,
+    onPrimary = Color.White,
+    background = MainBlue,
+    onBackground = Color.White
 )
 
 @Composable

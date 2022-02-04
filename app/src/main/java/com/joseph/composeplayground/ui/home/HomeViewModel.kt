@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor(
                         loadState         = LoadState.Idle,
                         upComingMovieList = uiState.value.upComingMovieList.copy(
                             movies = uiState.value.upComingMovieList.movies + movieListEntity.results.map { Movie.fromEntity(it) },
-                            page   = movieListEntity.page!!,
+                            page   = movieListEntity.page + 1,
                         )
                     )
 
@@ -51,8 +51,6 @@ class HomeViewModel @Inject constructor(
                 onFailed = { message ->
                     val newState = uiState.value.copy(loadState = LoadState.Failed)
                     updateState(newState)
-
-                    dispatchEvent(HomeEvent.FetchMovieListFailed(message = message))
                 }
             )
     }
