@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                         route = "home_screen"
                     ) {
                         HomeScreen { movieId ->
-                            navController.navigate(movieId)
+                            navController.navigate("detail_screen/${movieId}")
                         }
                     }
 
