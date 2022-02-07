@@ -39,6 +39,7 @@ import com.joseph.composeplayground.model.Movie
 import com.joseph.composeplayground.ui.theme.ComposePlaygroundTheme
 import com.joseph.composeplayground.ui.theme.MainBlue
 import com.joseph.composeplayground.ui.theme.Suit
+import com.joseph.composeplayground.util.Constants.BASE_IMAGE_URL_500
 import com.joseph.composeplayground.util.Constants.BASE_IMAGE_URL_ORIGINAL
 
 @Preview
@@ -62,7 +63,7 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(vertical = 16.dp)
             ) {
                 TitleText()
                 Spacer(modifier = Modifier.height(16.dp))
@@ -84,6 +85,7 @@ fun HomeScreen(
 fun TitleText() {
     Column(
         modifier = Modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
@@ -121,6 +123,7 @@ fun SearchBar(
 
     Row(
         modifier = Modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
             .height(34.dp)
@@ -159,6 +162,7 @@ fun SearchBar(
 fun UpComingMoviesTitle() {
     Text(
         modifier = Modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .wrapContentHeight(),
         text = "UpComing Movies",
@@ -175,6 +179,8 @@ fun UpComingMovieList(
     navigateToDetailScreen: (MovieId) -> Unit
 ) {
     LazyRow(
+        modifier = Modifier
+            .padding(start = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         itemsIndexed(items = movieList, key = { _, movie -> movie.id!! }) { index, movie ->
@@ -198,7 +204,7 @@ fun MovieItem(
             },
     ) {
         val painter = rememberImagePainter(
-            data = BASE_IMAGE_URL_ORIGINAL + movie.posterPath,
+            data = BASE_IMAGE_URL_500 + movie.posterPath,
             builder = {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.primary,
