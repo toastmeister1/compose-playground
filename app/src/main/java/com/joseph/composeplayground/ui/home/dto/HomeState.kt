@@ -6,28 +6,34 @@ import com.joseph.composeplayground.util.LoadState
 
 
 data class HomeState(
-    val loadState: LoadState,
-    val upComingMovieList: UpComingMovieState
+    val upComingMoviesState: UpComingMoviesState
 ) : UiState {
 
     companion object {
         fun getInitial(): HomeState {
             return HomeState(
-                loadState = LoadState.Idle,
-                upComingMovieList = UpComingMovieState.getInitial()
+                upComingMoviesState = UpComingMoviesState.getInitial()
             )
         }
     }
 
-    data class UpComingMovieState(
+    data class UpComingMoviesState(
+        val loadState: LoadState,
         val movies: List<Movie>,
-        val page: Int
+        val page: Int,
+        val endReached: Boolean
     ) {
+        fun changeLoadState(changingState: LoadState): UpComingMoviesState {
+            return this.copy(loadState = changingState)
+        }
+
         companion object {
-            fun getInitial(): UpComingMovieState {
-                return UpComingMovieState(
+            fun getInitial(): UpComingMoviesState {
+                return UpComingMoviesState(
+                    loadState = LoadState.Idle,
                     movies = emptyList(),
-                    page = 1
+                    page = 1,
+                    endReached = false
                 )
             }
         }

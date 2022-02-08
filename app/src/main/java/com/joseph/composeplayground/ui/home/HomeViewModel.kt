@@ -1,6 +1,5 @@
 package com.joseph.composeplayground.ui.home
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.joseph.composeplayground.base.BaseViewModel
 import com.joseph.composeplayground.model.Movie
@@ -33,15 +32,23 @@ class HomeViewModel @Inject constructor(
     }
 
     private suspend fun fetchUpComingMovieList(state: HomeState) {
-        val params = FetchUpComingMovieListUseCase.Params(page = state.upComingMovieList.page)
+        updateState(newState = state.copy(
+            upComingMoviesState = state.upComingMoviesState.copy(
+                loadState = LoadState.Loading,
+                endReached = true
+            )
+        ))
+
+        val params = FetchUpComingMovieListUseCase.Params(page = state.upComingMoviesState.page)
         fetchUpComingMovieListUseCase.invoke(params = params)
             .collectWithCallback(
                 onSuccess = { movieListEntity ->
                     val newState = uiState.value.copy(
-                        loadState         = LoadState.Idle,
-                        upComingMovieList = uiState.value.upComingMovieList.copy(
-                            movies = uiState.value.upComingMovieList.movies + movieListEntity.results.map { Movie.fromEntity(it) },
+                        upComingMoviesState = uiState.value.upComingMoviesState.copy(
+                            loadState = LoadState.Idle,
+                            movies = uiState.value.upComingMoviesState.movies + movieListEntity.results.map { Movie.fromEntity(it) },
                             page   = movieListEntity.page + 1,
+                            endReached = false
                         )
                     )
 
@@ -49,8 +56,11 @@ class HomeViewModel @Inject constructor(
                 },
 
                 onFailed = { message ->
-                    val newState = uiState.value.copy(loadState = LoadState.Failed)
-                    updateState(newState)
+                    updateState(newState = uiState.value.copy(
+                        upComingMoviesState = state.upComingMoviesState.copy(
+                            loadState = LoadState.Failed
+                        )
+                    ))
                 }
             )
     }
