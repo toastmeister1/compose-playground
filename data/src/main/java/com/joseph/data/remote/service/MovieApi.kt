@@ -15,7 +15,7 @@ interface MovieApi {
     companion object {
         const val BASE_URL = "https://api.themoviedb.org/3/"
 
-        const val LANGUAGE_KR = "ko_KR"
+        const val LANGUAGE_KR = "ko-KR"
         const val LANGUAGE_EN = "en-US"
     }
 
