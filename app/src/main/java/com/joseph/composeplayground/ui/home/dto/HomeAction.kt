@@ -6,4 +6,5 @@ import com.joseph.composeplayground.model.Movie
 
 sealed class HomeAction : UiAction {
     object FetchUpComingMovieList: HomeAction()
+    object FetchPopularMovieList: HomeAction()
 }
