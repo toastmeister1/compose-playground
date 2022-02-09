@@ -83,7 +83,7 @@ fun HomeScreen(
                 PopularMovieList(
                     popularMoviesState = uiState.value.popularMoviesState,
                     navigateToDetailScreen = navigateToDetailScreen,
-                    onEndReached = { viewModel.onAction(HomeAction.FetchUpComingMovieList) }
+                    onEndReached = { viewModel.onAction(HomeAction.FetchPopularMovieList) }
                 )
             }
         }
