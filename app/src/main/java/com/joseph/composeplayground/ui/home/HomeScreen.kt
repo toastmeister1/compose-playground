@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -55,36 +56,37 @@ fun HomeScreen(
     navigateToDetailScreen: (MovieId) -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsState()
-    val scrollState = rememberScrollState()
 
     ComposePlaygroundTheme {
         Surface(
-            color = MainBlue,
+            color = MaterialTheme.colors.background,
             modifier = Modifier.fillMaxSize()
         ) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
             ) {
-                TitleText()
-                Spacer(modifier = Modifier.height(16.dp))
-                SearchBar()
-                Spacer(modifier = Modifier.height(26.dp))
-                ListSectionHeader(text = "UpComingMovies")
-                Spacer(modifier = Modifier.height(12.dp))
-                UpComingMovieList(
-                    upComingMoviesState = uiState.value.upComingMoviesState,
-                    navigateToDetailScreen = navigateToDetailScreen,
-                    onEndReached = { viewModel.onAction(HomeAction.FetchUpComingMovieList) }
-                )
-                Spacer(modifier = Modifier.height(26.dp))
-                ListSectionHeader(text = "PopularMovies")
-                Spacer(modifier = Modifier.height(12.dp))
-                PopularMovieList(
-                    popularMoviesState = uiState.value.popularMoviesState,
-                    navigateToDetailScreen = navigateToDetailScreen,
-                    onEndReached = { viewModel.onAction(HomeAction.FetchPopularMovieList) }
-                )
+                item {
+                    TitleText()
+                    Spacer(modifier = Modifier.height(16.dp))
+                    SearchBar()
+                    Spacer(modifier = Modifier.height(26.dp))
+                    ListSectionHeader(text = "UpComingMovies")
+                    Spacer(modifier = Modifier.height(12.dp))
+                    UpComingMovieList(
+                        upComingMoviesState = uiState.value.upComingMoviesState,
+                        navigateToDetailScreen = navigateToDetailScreen,
+                        onEndReached = { viewModel.onAction(HomeAction.FetchUpComingMovieList) }
+                    )
+                    Spacer(modifier = Modifier.height(26.dp))
+                    ListSectionHeader(text = "PopularMovies")
+                    Spacer(modifier = Modifier.height(12.dp))
+                    PopularMovieList(
+                        popularMoviesState = uiState.value.popularMoviesState,
+                        navigateToDetailScreen = navigateToDetailScreen,
+                        onEndReached = { viewModel.onAction(HomeAction.FetchPopularMovieList) }
+                    )
+                }
             }
         }
     }
@@ -193,12 +195,14 @@ fun UpComingMovieList(
 ) {
     LazyRow(
         modifier = Modifier
+            .height(260.dp)
             .padding(start = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         itemsIndexed(
             items = upComingMoviesState.movies,
-            key = { _, movie -> movie.id!! }) { index, upComingMovie ->
+            key = { _, movie -> movie.id!! }
+        ) { index, upComingMovie ->
 
             if (index >= upComingMoviesState.movies.size - 3 && !upComingMoviesState.endReached) {
                 onEndReached.invoke()
@@ -304,14 +308,13 @@ fun PopularMovieList(
 ) {
     LazyColumn(
         modifier = Modifier
+            .wrapContentHeight()
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         itemsIndexed(
             items = popularMoviesState.movies,
-            key = { _, movie -> movie.id!! }) { index, popularMovie ->
-
-            if (index >= popularMoviesState.movies.size - 3 && !popularMoviesState.endReached) {
+            key = { _, movie -> movie.id!! }) { index, popularMovie ->          if (index >= popularMoviesState.movies.size - 3 && !popularMoviesState.endReached) {
                 onEndReached.invoke()
             }
 
