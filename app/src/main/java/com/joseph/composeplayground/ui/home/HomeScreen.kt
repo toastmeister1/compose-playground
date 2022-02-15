@@ -33,6 +33,7 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.joseph.composeplayground.R
 import com.joseph.composeplayground.model.Movie
+import com.joseph.composeplayground.ui.common.dto.MovieListState
 import com.joseph.composeplayground.ui.home.dto.HomeAction
 import com.joseph.composeplayground.ui.home.dto.HomeState
 import com.joseph.composeplayground.ui.theme.ComposePlaygroundTheme
@@ -189,7 +190,7 @@ fun ListSectionHeader(
 
 @Composable
 fun UpComingMovieList(
-    upComingMoviesState: HomeState.MovieListState,
+    upComingMoviesState: MovieListState,
     navigateToDetailScreen: (MovieId) -> Unit,
     onEndReached: () -> Unit
 ) {
@@ -302,7 +303,7 @@ fun MovieItemTypeA(
 
 @Composable
 fun PopularMovieList(
-    popularMoviesState: HomeState.MovieListState,
+    popularMoviesState: MovieListState,
     navigateToDetailScreen: (MovieId) -> Unit,
     onEndReached: () -> Unit
 ) {
