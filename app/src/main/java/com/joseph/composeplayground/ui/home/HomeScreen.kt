@@ -1,7 +1,6 @@
 package com.joseph.composeplayground.ui.home
 
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -35,7 +34,6 @@ import com.joseph.composeplayground.R
 import com.joseph.composeplayground.model.Movie
 import com.joseph.composeplayground.ui.common.dto.MovieListState
 import com.joseph.composeplayground.ui.home.dto.HomeAction
-import com.joseph.composeplayground.ui.home.dto.HomeState
 import com.joseph.composeplayground.ui.theme.ComposePlaygroundTheme
 import com.joseph.composeplayground.ui.theme.MainBlue
 import com.joseph.composeplayground.ui.theme.NetflixRed
@@ -309,13 +307,14 @@ fun PopularMovieList(
 ) {
     LazyColumn(
         modifier = Modifier
-            .wrapContentHeight()
+            .height(720.dp)
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         itemsIndexed(
             items = popularMoviesState.movies,
-            key = { _, movie -> movie.id!! }) { index, popularMovie ->          if (index >= popularMoviesState.movies.size - 3 && !popularMoviesState.endReached) {
+            key = { _, movie -> movie.id!! }) { index, popularMovie ->
+            if (index >= popularMoviesState.movies.size - 3 && !popularMoviesState.endReached) {
                 onEndReached.invoke()
             }
 
@@ -449,31 +448,17 @@ fun MovieItemTypeB(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                if(movie.adult == true) {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        text = "성인",
-                        fontSize = 8.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = Suit,
-                        color = NetflixRed,
-                        textAlign = TextAlign.Center,
-                    )
-                } else {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        text = "전체",
-                        fontSize = 8.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = Suit,
-                        color = Color(0xFF6D6D6D),
-                        textAlign = TextAlign.Center,
-                    )
-                }
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    text = if (movie.adult == true) "성인" else "전체",
+                    fontSize = 8.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = Suit,
+                    color = if (movie.adult == true) NetflixRed else Color(0xFF6D6D6D),
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }
