@@ -1,5 +1,6 @@
 package com.joseph.composeplayground.ui.detail
 
+import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -7,7 +8,6 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,9 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -73,14 +76,26 @@ fun DetailMovieInformation(
             url = state.movieDetail?.backdropPath ?: "",
             modifier = Modifier.align(Alignment.TopCenter)
         )
-        MoviePreviewSection(
-            movieDetail = state.movieDetail!!,
+
+        Column(
             modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .align(Alignment.TopCenter)
-                .padding(16.dp),
-        )
+        ) {
+            HeaderSection(
+                movieDetail = state.movieDetail!!,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+            )
+
+            BodySection(
+                movieDetail = state.movieDetail,
+            )
+        }
+
     }
 }
 
@@ -89,7 +104,7 @@ fun BackdropImage(
     modifier: Modifier = Modifier,
     url: String
 ) {
-    val backdropPainter = rememberImagePainter(
+    val painter = rememberImagePainter(
         data = Constants.BASE_IMAGE_URL_ORIGINAL + url,
         builder = {
             crossfade(true)
@@ -97,7 +112,7 @@ fun BackdropImage(
     )
 
     Image(
-        painter = backdropPainter,
+        painter = painter,
         contentDescription = null,
         modifier = modifier
             .fillMaxWidth()
@@ -106,68 +121,37 @@ fun BackdropImage(
 }
 
 @Composable
-fun MoviePreviewSection(
+fun HeaderSection(
     modifier: Modifier = Modifier,
     movieDetail: MovieDetail
 ) {
-    val posterPainter = rememberImagePainter(
-        data = Constants.BASE_IMAGE_URL_ORIGINAL + movieDetail.posterPath,
-        builder = {
-            crossfade(true)
-        }
-    )
-
     ConstraintLayout(
         modifier = modifier
     ) {
         val (posterImage, title, originalTitle, informationBoxes) = createRefs()
 
-        Card(
-            modifier = Modifier
-                .clip(RoundedCornerShape(5.dp))
-                .size(120.dp, 180.dp)
-                .constrainAs(posterImage) {
-                    top.linkTo(anchor = parent.top, margin = 144.dp)
-                    start.linkTo(anchor = parent.start)
-                }
-        ) {
-            Image(
-                painter = posterPainter,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(5.dp))
-            )
-        }
-
-
-        Text(
-            text = movieDetail.title ?: "",
-            fontFamily = Suit,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(title) {
-                    top.linkTo(anchor = posterImage.top, margin = 88.dp)
-                    start.linkTo(anchor = posterImage.end, margin = 18.dp)
-                }
+        PosterImage(
+            url = movieDetail.posterPath ?: "",
+            modifier = Modifier.constrainAs(posterImage) {
+                top.linkTo(anchor = parent.top, margin = 144.dp)
+                start.linkTo(anchor = parent.start)
+            }
         )
 
-        Text(
+        Title(
+            text = movieDetail.title ?: "",
+            modifier = Modifier.constrainAs(title) {
+                top.linkTo(anchor = posterImage.top, margin = 88.dp)
+                start.linkTo(anchor = posterImage.end, margin = 18.dp)
+            }
+        )
+
+        OriginalTitle(
             text = movieDetail.originalTitle ?: "",
-            fontFamily = Suit,
-            fontSize = 10.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color(0xFFB1B1B1),
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(originalTitle) {
-                    top.linkTo(anchor = title.bottom, margin = 4.dp)
-                    start.linkTo(anchor = title.start)
-                }
+            modifier = Modifier.constrainAs(originalTitle) {
+                top.linkTo(anchor = title.bottom, margin = 4.dp)
+                start.linkTo(anchor = title.start)
+            }
         )
 
         Row(
@@ -178,7 +162,8 @@ fun MoviePreviewSection(
                     top.linkTo(anchor = originalTitle.bottom, margin = 12.dp)
                     start.linkTo(anchor = originalTitle.start)
                 },
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             InformationBox(
                 title = "평점",
@@ -190,8 +175,65 @@ fun MoviePreviewSection(
                 content = if (movieDetail.adult == true) "성인" else "전체"
             )
         }
-
     }
+}
+
+@Composable
+fun PosterImage(
+    url: String,
+    modifier: Modifier = Modifier
+) {
+    val painter = rememberImagePainter(
+        data = Constants.BASE_IMAGE_URL_ORIGINAL + url,
+        builder = {
+            crossfade(true)
+        }
+    )
+
+    Image(
+        painter = painter,
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .clip(RoundedCornerShape(5.dp))
+            .size(120.dp, 180.dp)
+    )
+}
+
+@Composable
+fun Title(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontFamily = Suit,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+        maxLines = 2,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    )
+}
+
+@Composable
+fun OriginalTitle(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontFamily = Suit,
+        fontSize = 10.sp,
+        fontWeight = FontWeight.Normal,
+        color = Color(0xFFB1B1B1),
+        maxLines = 1,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    )
 }
 
 @Composable
@@ -203,9 +245,9 @@ fun InformationBox(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .clip(RoundedCornerShape(5.dp))
             .size(48.dp)
             .background(Color.White)
-            .clip(RoundedCornerShape(5.dp)),
     ) {
         Text(
             text = title,
@@ -217,7 +259,6 @@ fun InformationBox(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(16.dp),
-
         )
 
         Spacer(modifier = Modifier.height(2.dp))
@@ -234,6 +275,112 @@ fun InformationBox(
                 .height(16.dp)
         )
     }
+}
+
+@Composable
+fun BodySection(
+    movieDetail: MovieDetail,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        if(!movieDetail.tagline.isNullOrBlank()) {
+            TagLine(movieDetail.tagline)
+        }
+
+        Spacer(modifier = Modifier.height(22.dp))
+        ContentWithHeader(
+            header = { ContentLabel("Description") },
+            content = { Content(text = movieDetail.overview ?: "정보없음") }
+        )
+        Spacer(modifier = Modifier.height(18.dp))
+        ContentWithHeader(
+            header = { ContentLabel("ReleaseDate") },
+            content = { Content(text = movieDetail.releaseDate ?: "정보없음") }
+        )
+    }
+}
+
+@Composable
+fun TagLine(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 30.dp)
+    ) {
+        Text(
+            text = "\"$text\"",
+            fontSize = 12.sp,
+            color = Color.White,
+            fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.Thin,
+            fontFamily = Suit,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(16.dp),
+        )
+    }
+}
+
+@Composable
+fun ContentWithHeader(
+    header: @Composable () -> Unit,
+    content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        header()
+        Spacer(modifier = Modifier.height(8.dp))
+        content()
+    }
+}
+
+@Composable
+fun ContentLabel(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 12.sp,
+        color = Color.White,
+        fontWeight = FontWeight.Bold,
+        fontFamily = Suit,
+        textAlign = TextAlign.Start,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    )
+}
+
+@Composable
+fun Content(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 12.sp,
+        color = Color.White,
+        fontWeight = FontWeight.Light,
+        fontFamily = Suit,
+        lineHeight = 16.sp,
+        textAlign = TextAlign.Start,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    )
 }
 
 @Composable
