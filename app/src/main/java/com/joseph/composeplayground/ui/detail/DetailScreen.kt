@@ -74,7 +74,10 @@ fun DetailMovieInformation(
     ) {
         BackdropImage(
             url = state.movieDetail?.backdropPath ?: "",
-            modifier = Modifier.align(Alignment.TopCenter)
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .align(Alignment.TopCenter)
         )
 
         Column(
@@ -116,7 +119,8 @@ fun BackdropImage(
         contentDescription = null,
         modifier = modifier
             .fillMaxWidth()
-            .height(240.dp)
+            .height(240.dp),
+        contentScale = ContentScale.FillWidth
     )
 }
 

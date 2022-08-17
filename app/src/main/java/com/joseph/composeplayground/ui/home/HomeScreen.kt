@@ -91,7 +91,7 @@ fun HomeScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun TitleText() {
     Column(
