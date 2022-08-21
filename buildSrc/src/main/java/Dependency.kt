@@ -5,8 +5,8 @@ object Dependency {
     const val INJECT = "javax.inject:javax.inject:1"
 
     object Kotlin {
-        private const val version = "1.5.21"
-        private const val coroutineVersion = "1.5.1"
+        private const val version = "1.7.10"
+        private const val coroutineVersion = "1.6.1"
 
         const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
@@ -17,7 +17,7 @@ object Dependency {
     }
 
     object Compose {
-        private const val compose_version = "1.0.5"
+        private const val compose_version = "1.3.0-alpha02"
         const val UI = "androidx.compose.ui:ui:$compose_version"
         const val MATERIAL = "androidx.compose.material:material:$compose_version"
         const val TOOL_PREVIEW = "androidx.compose.ui:ui-tooling:$compose_version"
@@ -31,12 +31,11 @@ object Dependency {
     }
 
     object Dagger {
-        private const val dagger_version = "2.40.1"
+        private const val dagger_version = "2.42"
         const val HILT_ANDROID = "com.google.dagger:hilt-android:$dagger_version"
         const val HILT_COMPILER = "com.google.dagger:hilt-compiler:$dagger_version"
         const val HILT_GRADLE_PLUGIN = "com.google.dagger:hilt-android-gradle-plugin:$dagger_version"
-        const val HILT_LIFECYCLE_VIEWMODEL = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-        const val HILT_NAVIGATION_COMPOSE = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+        const val HILT_NAVIGATION_COMPOSE = "androidx.hilt:hilt-navigation-compose:1.0.0"
     }
 
     object Room {

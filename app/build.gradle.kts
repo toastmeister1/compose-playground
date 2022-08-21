@@ -1,3 +1,5 @@
+import Configs.COMPOSE_COMPILER_VERSION
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -41,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Configs.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = COMPOSE_COMPILER_VERSION
     }
     packagingOptions {
         resources {
@@ -73,7 +75,6 @@ dependencies {
     debugImplementation(Dependency.Compose.TOOL_UI)
 
     implementation(Dependency.Dagger.HILT_ANDROID)
-    implementation(Dependency.Dagger.HILT_LIFECYCLE_VIEWMODEL)
     implementation(Dependency.Dagger.HILT_NAVIGATION_COMPOSE)
     kapt(Dependency.Dagger.HILT_COMPILER)
 

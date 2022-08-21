@@ -31,9 +31,6 @@ class DetailViewModel @Inject constructor(
     }
 
     override suspend fun handleAction(action: DetailAction) {
-        when(action) {
-            // TODO
-        }
     }
 
     private suspend fun fetchInitialDetailInformation(movieId: Int) {

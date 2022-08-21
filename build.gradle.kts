@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.4")
+        classpath("com.android.tools.build:gradle:7.2.2")
         classpath(Dependency.Kotlin.GRADLE_PLUGIN)
         classpath(Dependency.Kotlin.SERIALIZATION_PLUGIN)
         classpath(Dependency.Dagger.HILT_GRADLE_PLUGIN)
