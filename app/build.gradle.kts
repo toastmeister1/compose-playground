@@ -58,6 +58,8 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
     implementation(Dependency.CORE)
     implementation(Dependency.APP_COMPAT)
     implementation(Dependency.Ktx.LIFECYCLE)
